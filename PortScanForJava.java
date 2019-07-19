@@ -1,7 +1,7 @@
 /*
-*     ´Ë¹¤¾ßÓÉ2019.7.9ÕıÊ½Íê¹¤ÉÏ´«ÖÁGitHub
-*     ±àĞ´Õß:SKY¡¤SEC KaMi
-*     SKY°²È«ÍÅ¶Ó¡¤²»Íü³õĞÄ¡¤·½µÃÊ¼ÖÕ
+*     æ­¤å·¥å…·ç”±2019.7.9æ­£å¼å®Œå·¥ä¸Šä¼ è‡³GitHub
+*     ç¼–å†™è€…:SKYÂ·SEC KaMi
+*     SKYå®‰å…¨å›¢é˜ŸÂ·ä¸å¿˜åˆå¿ƒÂ·æ–¹å¾—å§‹ç»ˆ
 */
 
 
@@ -15,73 +15,84 @@ public class PortScanForJava {
 
     public static void main(String[] args) {
         System.out.println("+---------------------------------------------------------------------+");
-        System.out.println("+---¡¾»¶Ó­Ê¹ÓÃSKY°²È«ÍÅ¶Ó³£¼û¶Ë¿ÚÉ¨ÃèÆ÷-JAVA°æ±¾-¿ª·¢Õß£ºSKY.KaMi¡¿---+");
-        System.out.println("+----------------¡¾SKY¡¤SECURITY£ºWWW.HI-AWSAFE.COM¡¿-----------------+");
+        System.out.println("+---ã€æ¬¢è¿ä½¿ç”¨SKYå®‰å…¨å›¢é˜Ÿå¸¸è§ç«¯å£æ‰«æå™¨-JAVAç‰ˆæœ¬-å¼€å‘è€…ï¼šSKY.KaMiã€‘---+");
+        System.out.println("+----------------ã€SKYÂ·SECURITYï¼šWWW.HI-AWSAFE.COMã€‘-----------------+");
         System.out.println("+---------------------------------------------------------------------+");
         int[] port = new int[]{
                 21, 22, 23, 80, 8080, 88, 8888, 3306, 3389, 3312, 445, 443, 1433
-        };//ÉèÖÃĞèÒªÉ¨ÃèµÄ¶Ë¿Ú
+        };//è®¾ç½®éœ€è¦æ‰«æçš„ç«¯å£
         Scanner scan = new Scanner(System.in);
-        System.out.print("ÇëÊäÈëĞèÒªÉ¨ÃèµÄIP£º");
+        System.out.print("è¯·è¾“å…¥éœ€è¦æ‰«æçš„IPï¼š");
         String url = scan.next();
-        System.out.println("[ÕıÔÚ¸øIP£º" + url + "É¨ÃèÖĞ]");
+
+
+        try {//å°†åŸŸåè½¬æ¢æˆIPçš„æ ¼å¼è¿›è¡Œæ‰«æ
+            InetAddress[] addresses = InetAddress.getAllByName(url);
+            for (int i = 0; i < addresses.length; i++) {
+                System.out.println("[æ­£åœ¨ç»™IP:" + addresses[i].getHostAddress()+"æ‰«æä¸­]");
+            }
+        } catch (UnknownHostException uhe) {
+            System.err.println("Unable to find: " + args[0]);
+        }
+
+
 
         try {
             InetAddress getname = InetAddress.getByName(url);
         } catch (UnknownHostException var10) {
-            System.out.println("ÎŞ·¨ÕÒµ½ " + url);//ÅĞ¶ÏurlÊÇ·ñÕıÈ·
+            System.out.println("æ— æ³•æ‰¾åˆ° " + url);//åˆ¤æ–­urlæ˜¯å¦æ­£ç¡®
             return;
         }
 
-        for(int nport:port){//Ê¹ÓÃforeachÓï¾äÑ­»·¶Ë¿ÚÉ¨Ãè
+        for(int nport:port){//ä½¿ç”¨foreachè¯­å¥å¾ªç¯ç«¯å£æ‰«æ
             try {
                 System.out.print("[+]" + nport);
                 Socket sock = new Socket(url, nport);
                 System.out.println(" : open");
-                switch(nport) { //³öÏÖ³£¼û¶Ë¿Ú¼ÇÂ¼ÏÂÀ´
+                switch(nport) { //å‡ºç°å¸¸è§ç«¯å£è®°å½•ä¸‹æ¥
                     case 21:
-                        System.out.println("´ËIPÒÉËÆ¿ªÆôÁËFTP·şÎñ");
+                        System.out.println("æ­¤IPç–‘ä¼¼å¼€å¯äº†FTPæœåŠ¡");
                         break;
                     case 22:
-                        System.out.println("´ËIPÒÉËÆ¿ªÆôÁËSSH·şÎñ");
+                        System.out.println("æ­¤IPç–‘ä¼¼å¼€å¯äº†SSHæœåŠ¡");
                         break;
                     case 23:
-                        System.out.println("´ËIPÒÉËÆ¿ªÆôÁËTelnet ·şÎñ ");
+                        System.out.println("æ­¤IPç–‘ä¼¼å¼€å¯äº†Telnet æœåŠ¡ ");
                         break;
                     case 80:
-                        System.out.println("´ËIPÒÉËÆ¿ªÆôÁËWEB·şÎñ");
+                        System.out.println("æ­¤IPç–‘ä¼¼å¼€å¯äº†WEBæœåŠ¡");
                         break;
                     case 88:
-                        System.out.println("´ËIPÒÉËÆ¿ªÆôÁËKerberos ÍøÂçÑéÖ¤ÏµÍ³·şÎñ");
+                        System.out.println("æ­¤IPç–‘ä¼¼å¼€å¯äº†Kerberos ç½‘ç»œéªŒè¯ç³»ç»ŸæœåŠ¡");
                         break;
                     case 443:
-                        System.out.println("´ËIPÒÉËÆ¿ªÆôÁËHTTPS·şÎñ");
+                        System.out.println("æ­¤IPç–‘ä¼¼å¼€å¯äº†HTTPSæœåŠ¡");
                         break;
                     case 445:
-                        System.out.println("´ËIPÒÉËÆ¿ªÆôÁËSMB·şÎñ");
+                        System.out.println("æ­¤IPç–‘ä¼¼å¼€å¯äº†SMBæœåŠ¡");
                         break;
                     case 1433:
-                        System.out.println("´ËIPÒÉËÆ¿ªÆôÁËSQL server·şÎñ");
+                        System.out.println("æ­¤IPç–‘ä¼¼å¼€å¯äº†SQL serveræœåŠ¡");
                         break;
                     case 3306:
-                        System.out.println("´ËIPÒÉËÆ¿ªÆôÁËMySQL·şÎñ");
+                        System.out.println("æ­¤IPç–‘ä¼¼å¼€å¯äº†MySQLæœåŠ¡");
                         break;
                     case 3312:
-                        System.out.println("´ËIPÒÉËÆ¿ªÆôÁËKangle·şÎñ");
+                        System.out.println("æ­¤IPç–‘ä¼¼å¼€å¯äº†KangleæœåŠ¡");
                         break;
                     case 3389:
-                        System.out.println("´ËIPÒÉËÆ¿ªÆôÁËRDP·şÎñ");
+                        System.out.println("æ­¤IPç–‘ä¼¼å¼€å¯äº†RDPæœåŠ¡");
                         break;
                     case 8080:
-                        System.out.println("´ËIPÒÉËÆ¿ªÆôÁËÍòÎ¬Íø£¨WWW£©»º´æ·şÎñ ");
+                        System.out.println("æ­¤IPç–‘ä¼¼å¼€å¯äº†ä¸‡ç»´ç½‘ï¼ˆWWWï¼‰ç¼“å­˜æœåŠ¡ ");
                 }
             } catch (IOException var9) {
-                System.out.println("£ºclose");
+                System.out.println("ï¼šclose");
             }
         }
 
         System.out.println("---------------------");
-        System.out.println("É¨ÃèÍê³É£¬¸ĞĞ»Ê¹ÓÃ¡£");
+        System.out.println("æ‰«æå®Œæˆï¼Œæ„Ÿè°¢ä½¿ç”¨ã€‚");
     }
 }
 
